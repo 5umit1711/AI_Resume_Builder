@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ResumeContext } from "@/context/resumeContext";
 
 const PreviewSection = ({ resumeInfo : propResumeInfo }) => {

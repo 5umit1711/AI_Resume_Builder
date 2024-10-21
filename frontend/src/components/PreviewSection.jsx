@@ -1,9 +1,10 @@
 import React from "react";
 import { ResumeContext } from "@/context/resumeContext";
 
-const PreviewSection = ({ resumeInfo = {} }) => {
-  // Uncomment this if you plan to use context instead of props
-  // const { resumeInfo } = useContext(ResumeContext) || {};
+const PreviewSection = ({ resumeInfo : propResumeInfo }) => {
+  const { resumeInfo : contextResumeInfo } = useContext(ResumeContext) || {};
+
+  const resumeInfo = propResumeInfo || contextResumeInfo;
 
   return (
     <div className="p-6 bg-white shadow-xl rounded-lg border border-gray-200 mx-auto max-w-4xl">

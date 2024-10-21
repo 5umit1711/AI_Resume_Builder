@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ResumeContext } from "@/context/resumeContext";
 
-const PreviewSection = ({ resumeInfo }) => {
+const PreviewSection = ({ resumeInfo = {}}) => {
   // const { resumeInfo } = useContext(ResumeContext);
 
   return (

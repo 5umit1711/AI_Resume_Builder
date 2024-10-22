@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { ResumeContext } from "@/context/resumeContext";
 
 const PreviewSection = ({ resumeInfo : propResumeInfo }) => {
-  const { resumeInfo : contextResumeInfo } = useContext(ResumeContext) || {};
+  const { resumeInfo : contextResumeInfo } = useContext(ResumeContext);
 
-  const resumeInfo = propResumeInfo || contextResumeInfo;
+  const resumeInfo = propResumeInfo || contextResumeInfo || {};
 
   return (
     <div className="p-6 bg-white shadow-xl rounded-lg border border-gray-200 mx-auto max-w-4xl">

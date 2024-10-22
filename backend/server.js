@@ -28,7 +28,7 @@ app.get("*", (req,res)=>{
 })
 
 
-app.listen(PORT, ()=>{
-    connection();
+app.listen(PORT, async()=>{
+    await connection();
     console.log("Server started");
 })

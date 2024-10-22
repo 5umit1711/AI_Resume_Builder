@@ -3,10 +3,7 @@ import React, { createContext, useState } from "react";
 export const ResumeContext = createContext();
 
 const ResumeProvider = ({ children }) => {
-  const [resumeInfo, setResumeInfo] = useState({
-    firstName: "",
-    lastName: "",
-  });
+  const [resumeInfo, setResumeInfo] = useState({});
 
   return (
     <ResumeContext.Provider value={{ resumeInfo, setResumeInfo }}>

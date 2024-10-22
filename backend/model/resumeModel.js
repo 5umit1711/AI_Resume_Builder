@@ -39,24 +39,31 @@ const resumeSchema = new mongoose.Schema(
     },
     firstName: {
       type: String,
+      default: "",
     },
     lastName: {
       type: String,
+      default: "",
     },
     address: {
       type: String,
+      default: "",
     },
     jobTitle: {
       type: String,
+      default: "",
     },
     phoneNo: {
       type: String,
+      default: "",
     },
     email: {
       type: String,
+      default: "",
     },
     summary: {
       type: String,
+      default: "",
     },
     experience: [experienceSchema],
     education: [educationSchema],

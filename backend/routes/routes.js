@@ -1,147 +1,50 @@
-import express from "express";
-import Resume from "../model/resumeModel.js";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import PreviewSection from "./PreviewSection";
+import FormSection from "./FormSection";
+import { getResumeById } from "./../../hooks/userApi";
+import { ResumeContext } from "@/context/resumeContext";
 
-const router = express.Router();
+const EditResume = () => {
+  const { resumeInfo, setResumeInfo } = useContext(ResumeContext);
+  const { _id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-router.post("/create-resume", async (req, res) => {
-  try {
-    const newResume = await Resume(req.body);
-    const resume = await newResume.save();
+  useEffect(() => {
+    const fetchResume = async () => {
+      try {
+        const data = await getResumeById(_id);
+        if (data && data.resume) {
+          setResumeInfo(data.resume);
+        } else {
+          setError("Resume data not found");
+        }
+      } catch (err) {
+        setError("Error fetching resume");
+        console.error("Failed to fetch resume:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    res.send({
-      _id: resume._id,
-      success: true,
-      message: "Title added successfully",
-    });
-  } catch (error) {
-    console.log(error);
+    fetchResume();
+  }, [_id, setResumeInfo]);
+
+  if (error) {
+    return <p className="text-red-500">{error}</p>;
   }
-});
 
-router.post("/get-resume", async (req, res) => {
-  try {
-    const { userEmail } = req.body;
-    const resumes = await Resume.find({ userEmail }).sort({ createdAt: -1 });
-    return res.send({
-      succcess: true,
-      data: resumes,
-    });
-  } catch (error) {
-    console.log(error);
+  if (loading) {
+    return <p>Loading...</p>;
   }
-});
 
-router.get("/getById/:id", async(req, res)=>{
-  try {
-    const id = req.params.id;
-    const resume = await Resume.findById(id);
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 p-10 gap-8">
+      <FormSection />
+      <PreviewSection resumeInfo={resumeInfo} />
+    </div>
+  );
+};
 
-    res.send({
-      success: true,
-      message: "Saved Successfully",
-      resume: resume,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-router.post("/update-resume/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const data = req.body;
-    const resume = await Resume.findByIdAndUpdate(id, data, { new: true });
-
-    res.send({
-      success: true,
-      message: "Saved Successfully",
-      data: resume,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-router.post("/update-exp/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const { experience } = req.body;
-
-    const resume = await Resume.findById(id);
-    experience.forEach((element) => {
-      resume.experience.push(element);
-    });
-
-    const newResume = await resume.save();
-
-    return res.send({
-      success: true,
-      message: "Success",
-      data: newResume,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-router.post("/update-education/:id", async(req,res)=>{
-  try {
-    const id = req.params.id;
-    const {educationList} = req.body;
-
-    const resume = await Resume.findById(id);
-    educationList?.forEach((element) => {
-      resume.education.push(element);
-    });
-
-    const newResume = await resume.save();
-
-    return res.send({
-      success: true,
-      message: "Success",
-      data: newResume,
-    });
-
-  } catch (error) {
-    console.log(error);
-  }
-})
-
-router.post("/update-skills/:id", async(req,res)=>{
-  try {
-    const id = req.params.id;
-    const {skillList} = req.body;
-
-    const resume = await Resume.findById(id);
-    skillList?.forEach((element) => {
-      resume.skills.push(element);
-    });
-
-    const newResume = await resume.save();
-
-    return res.send({
-      success: true,
-      message: "Success",
-      data: newResume,
-    });
-
-  } catch (error) {
-    console.log(error);
-  }
-})
-
-router.delete("/delete/:id", async(req,res)=>{
-    try{
-      const id = req.params.id;
-      await Resume.findByIdAndDelete(id);
-
-      res.send({
-        success: true,
-        message: "Resume deleted successfully",
-      })
-    }catch(error){
-      console.log(error);
-    }
-})
-
-export default router;
+export default EditResume;

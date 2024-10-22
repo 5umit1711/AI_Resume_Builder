@@ -32,13 +32,13 @@ const FormSection = () => {
       {formIndex === 1 ? (
         <PersonalDetail setFormIndex={setFormIndex} formIndex={formIndex} />
       ) : null}
-      {formIndex === 2 ? <Summary /> : null}
+      {formIndex === 2 ? <Summary setFormIndex={setFormIndex} formIndex={formIndex}/> : null}
 
-      {formIndex === 3 ? <Experience/> : null}
+      {formIndex === 3 ? <Experience setFormIndex={setFormIndex} formIndex={formIndex}/> : null}
 
-      {formIndex === 4 ? <Education/> : null}
+      {formIndex === 4 ? <Education setFormIndex={setFormIndex} formIndex={formIndex}/> : null}
 
-      {formIndex === 5 ? <Skill/> : null}
+      {formIndex === 5 ? <Skill setFormIndex={setFormIndex} formIndex={formIndex}/> : null}
 
 
       {formIndex === 6 ? navigate(`/myresume/${_id}/view`) : null}

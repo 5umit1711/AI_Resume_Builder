@@ -8,7 +8,7 @@ import { ResumeContext } from "@/context/resumeContext";
 import { updateSkills } from "./../../../hooks/userApi";
 import { useParams } from "react-router-dom";
 
-const Skill = () => {
+const Skill = ({formIndex, setFormIndex}) => {
   const {_id} = useParams();
   const [skillList, setSkillList] = useState([
     {
@@ -47,6 +47,7 @@ const Skill = () => {
   const handleSave = () => {
     setLoading(true);
     const res = updateSkills(_id, skillList);
+    setFormIndex(formIndex+1);
     setLoading(false);
   };
 

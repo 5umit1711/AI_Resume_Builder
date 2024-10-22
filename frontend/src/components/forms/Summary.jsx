@@ -7,7 +7,7 @@ import { updateResume } from "./../../../hooks/userApi";
 import { useParams } from "react-router-dom";
 import chatSession from "./../../../hooks/googleApi";
 
-const Summary = () => {
+const Summary = ({formIndex, setFormIndex}) => {
   const { _id } = useParams();
   const { resumeInfo, setResumeInfo } = useContext(ResumeContext);
   const [summary, setSummary] = useState();
@@ -19,6 +19,7 @@ const Summary = () => {
     setLoading(true);
     await updateResume(_id, { summary: summary });
     setLoading(false);
+    setFormIndex(formIndex + 1);
   };
 
   const generateAISummary = async () => {

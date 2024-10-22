@@ -18,7 +18,7 @@ const formField = {
   workSummary: "",
 };
 
-const Experience = () => {
+const Experience = ({formIndex, setFormIndex}) => {
   const { _id } = useParams();
   const [experienceList, setExperienceList] = useState([formField]);
   const { resumeInfo, setResumeInfo } = useContext(ResumeContext);
@@ -46,6 +46,7 @@ const Experience = () => {
   const handleSave = async () => {
     setLoading(true);
     const res = await updateExp(_id, experienceList);
+    setFormIndex(formIndex + 1);
     setLoading(false);
   };
 

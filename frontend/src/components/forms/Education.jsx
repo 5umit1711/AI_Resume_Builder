@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { LoaderCircle } from "lucide-react";
 
-const Education = () => {
+const Education = ({formIndex, setFormIndex}) => {
   const [loading, setLoading] = useState(false);
   const { _id } = useParams();
   const { resumeInfo, setResumeInfo } = useContext(ResumeContext);
@@ -48,6 +48,7 @@ const Education = () => {
   const handleSave = async () => {
     setLoading(true);
     const res = await updateEducation(_id, educationList);
+    setFormIndex(formIndex +1);
     setLoading(false);
   };
 

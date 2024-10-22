@@ -13,7 +13,6 @@ const EditResume = () => {
     const fetchResume = async()=>{
       const data = await getResumeById(_id);
       setResumeInfo(data.resume)
-      data = data.resume;
     }
     
     fetchResume();

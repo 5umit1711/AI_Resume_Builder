@@ -8,11 +8,13 @@ import { ResumeContext } from "@/context/resumeContext";
 const EditResume = () => {
   const { resumeInfo, setResumeInfo } = useContext(ResumeContext);
   const { _id } = useParams();
+  const data = {};
 
   useEffect(()=>{
     const fetchResume = async()=>{
       const data = await getResumeById(_id);
       setResumeInfo(data.resume)
+      data = data.resume;
     }
     
     fetchResume();
@@ -21,7 +23,7 @@ const EditResume = () => {
   return (
       <div className="grid grid-cols-1 md:grid-cols-2 p-10 gap-8">
         <FormSection />
-        <PreviewSection resumeInfo={resumeInfo}/>
+        <PreviewSection data={data}/>
       </div>
   );
 };

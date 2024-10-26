@@ -5,6 +5,7 @@ import PreviewSection from "./PreviewSection";
 import { RWebShare } from "react-web-share";
 import html2pdf from 'html2pdf.js';
 import { ResumeContext } from "@/context/resumeContext";
+import { getResumeById } from "./../../hooks/userApi";
 
 const MyResume = () => {
   const { resumeInfo, setResumeInfo } = useContext(ResumeContext);

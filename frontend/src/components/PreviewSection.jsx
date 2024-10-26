@@ -1,9 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ResumeContext } from "@/context/resumeContext";
+import { c } from "dist/assets/index-BW35yqrQ";
 
 const PreviewSection = ({ resumeInfo }) => {
   // const { resumeInfo : contextResumeInfo } = useContext(ResumeContext);
-
+  useEffect(()=>{
+    console.log(resumeInfo);
+  }, []);
+  
   return (
     <div className="p-6 bg-white shadow-xl rounded-lg border border-gray-200 mx-auto max-w-4xl">
       <div className="text-center mb-4">
